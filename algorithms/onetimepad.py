@@ -3,13 +3,13 @@ for i in range(26):
   table[chr(i+65)] = i
   table[i] = chr(i+65)
 
-def cifrate(text, key):
+def encrypt(text, key):
   result = ''
   for i in range(len(text)):
     result += table[(table[text[i]] + table[key[i]])%26]
   return result
 
-def decifrate(text, key):
+def decrypt(text, key):
   result = ''
   for i in range(len(text)):
     result += table[(table[text[i]] - table[key[i]])%26]
@@ -40,14 +40,14 @@ def to_text(source):
       cummulate = ''
   return text
 
-def cifrate_mod10(source, key):
+def encrypt_mod10(source, key):
   result = ''
   for i in range(len(source)):
     if source[i] != " ":
       result += str( (int(source[i]) - int(key[i]))%10 )
   return result
 
-def decifrate_mod10(source, key):
+def decrypt_mod10(source, key):
   result = ""
   for i in range(len(source)):
     if source[i] != " ":
@@ -58,14 +58,14 @@ def decifrate_mod10(source, key):
 if __name__ == '__main__':
   text = 'CRYPTOGRAPHY'
   key  = 'YHPARGOTPYRC'
-  result = cifrate(text, key)
+  result = encrypt(text, key)
   print(result)
-  print(decifrate(result, key))
+  print(decrypt(result, key))
 
   print()
 
   num = to_number(text)
   num_key = to_number(key)
-  num_result = cifrate_mod10(num, num_key)
+  num_result = encrypt_mod10(num, num_key)
   print(to_text(num_result))
-  print(to_text(decifrate_mod10(num_result, num_key)))
+  print(to_text(decrypt_mod10(num_result, num_key)))
